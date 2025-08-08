@@ -27,7 +27,7 @@ function App() {
             <ScrollToTop />
             <Routes>
                 <Route path='/' element={<Home />} />
-                <Route path='/login' element={<Login />} />
+                <Route path='/login' element={!userData ? <Login /> : <Navigate to={"/"} />} />
                 <Route path='/signup' element={!userData ? <SignUp /> : <Navigate to={"/"} />} />
 
             </Routes>
