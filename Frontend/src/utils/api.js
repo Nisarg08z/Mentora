@@ -105,3 +105,57 @@ export const getAllReviewsApi = async () => {
     throw error.response?.data || error;
   }
 };
+
+export const fetchCreatorCourses = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}course/getcreatorcourses`, {
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Creator Course API Error:", error.response?.data?.message || error.message);
+    throw error.response?.data || error;
+  }
+};
+
+export const sendOtp = async (email) => {
+  try {
+    const response = await axios.post(
+      `${BASE_URL}auth/sendotp`,
+      { email },
+      { withCredentials: true }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Send OTP Error:", error.response?.data?.message || error.message);
+    throw error.response?.data || error;
+  }
+};
+
+export const verifyOtp = async ({ email, otp }) => {
+  try {
+    const response = await axios.post(
+      `${BASE_URL}auth/verifyotp`,
+      { email, otp },
+      { withCredentials: true }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Verify OTP Error:", error.response?.data?.message || error.message);
+    throw error.response?.data || error;
+  }
+};
+
+export const resetPassword = async ({ email, password }) => {
+  try {
+    const response = await axios.post(
+      `${BASE_URL}auth/resetpassword`,
+      { email, password },
+      { withCredentials: true }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Reset Password Error:", error.response?.data?.message || error.message);
+    throw error.response?.data || error;
+  }
+};

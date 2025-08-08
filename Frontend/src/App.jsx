@@ -6,12 +6,14 @@ import { useSelector } from 'react-redux'
 import getCurrentUser from './hooks/getCurrentUser'
 import getCouseData from './hooks/getCouseData'
 import getAllReviews from './hooks/getAllReviews'
+import getCreatorCourseData from './hooks/getCreatorCourseData'
 
 import ScrollToTop from './components/ScrollToTop'
 
 import Home from './pages/HomePage'
 import Login from './pages/LoginPage'
 import SignUp from './pages/SignUpPage'
+import ForgotPassword from './pages/ForgotPasswordPage'
 
 function App() {
 
@@ -20,6 +22,7 @@ function App() {
     getCurrentUser()
     getCouseData()
     getAllReviews()
+    getCreatorCourseData()
 
     return (
         <>
@@ -29,6 +32,7 @@ function App() {
                 <Route path='/' element={<Home />} />
                 <Route path='/login' element={!userData ? <Login /> : <Navigate to={"/"} />} />
                 <Route path='/signup' element={!userData ? <SignUp /> : <Navigate to={"/"} />} />
+                <Route path='/forgotpassword' element={<ForgotPassword />} />
 
             </Routes>
         </>

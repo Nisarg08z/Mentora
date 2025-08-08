@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import logo from '../assets/logo.jpg'
+import logo from '../assets/logo.png'
 import google from '../assets/google.jpg'
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { MdRemoveRedEye } from "react-icons/md";
@@ -158,8 +158,7 @@ const LoginPage = () => {
 
                 {/* Right Side - Logo Panel */}
                 <div className="w-1/2 hidden md:flex bg-black text-white rounded-r-2xl flex-col items-center justify-center gap-2 p-6">
-                    <img src={logo} className="w-32 shadow-xl" alt="Logo" />
-                    <span className="text-xl font-semibold">VIRTUAL COURSES</span>
+                    <img src={logo} className="w-60 shadow-xl" alt="Logo" />
                 </div>
             </form>
         </div>

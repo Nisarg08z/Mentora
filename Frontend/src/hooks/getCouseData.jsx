@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCourseData } from '../redux/courseSlice.js';
 import { useEffect } from 'react';
