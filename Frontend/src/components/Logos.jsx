@@ -1,36 +1,46 @@
 import React from 'react'
-import { MdCastForEducation } from "react-icons/md";
-import { SiOpenaccess } from "react-icons/si";
-import { FaSackDollar } from "react-icons/fa6";
-import { BiSupport } from "react-icons/bi";
-import { FaUsers } from "react-icons/fa";
+import { MdCastForEducation } from "react-icons/md"
+import { SiOpenaccess } from "react-icons/si"
+import { FaSackDollar, FaUsers } from "react-icons/fa6"
+import { BiSupport } from "react-icons/bi"
+
+const features = [
+  {
+    icon: <MdCastForEducation className="w-6 h-6 text-[#03394b]" />,
+    text: "20k+ Online Courses",
+  },
+  {
+    icon: <SiOpenaccess className="w-6 h-6 text-[#03394b]" />,
+    text: "Lifetime Access",
+  },
+  {
+    icon: <FaSackDollar className="w-6 h-6 text-[#03394b]" />,
+    text: "Value For Money",
+  },
+  {
+    icon: <BiSupport className="w-6 h-6 text-[#03394b]" />,
+    text: "Lifetime Support",
+  },
+  {
+    icon: <FaUsers className="w-6 h-6 text-[#03394b]" />,
+    text: "Community Support",
+  },
+]
 
 const Logos = () => {
-    return (
-        <div className='w-[100vw] min-h-[90px]  flex items-center justify-center flex-wrap gap-4 md:mb-[50px] '>
-            <div className='flex items-center justify-center gap-2  px-5 py-3   rounded-3xl bg-gray-200 cursor-pointer'>
-                <MdCastForEducation className='w-[35px] h-[35px] fill-[#03394b]' />
-                <span className='text-[#03394b]'>20k+ Online Courses</span>
-            </div>
-            <div className='flex items-center justify-center gap-2  px-5 py-3   rounded-3xl bg-gray-200 cursor-pointer'>
-                <SiOpenaccess className='w-[30px] h-[30px] fill-[#03394b]' />
-                <span className='text-[#03394b]'>Lifetime Access</span>
-            </div>
-            <div className='flex items-center justify-center gap-2  px-5 py-3   rounded-3xl bg-gray-200 cursor-pointer'>
-                <FaSackDollar className='w-[30px] h-[30px] fill-[#03394b]' />
-                <span className='text-[#03394b]'>Value For Money</span>
-            </div>
-            <div className='flex items-center justify-center gap-2  px-5 py-3  rounded-3xl bg-gray-200 cursor-pointer'>
-                <BiSupport className='w-[35px] h-[35px] fill-[#03394b]' />
-                <span className='text-[#03394b]'>Lifetime Support</span>
-            </div>
-            <div className='flex items-center justify-center gap-2  px-5 py-3   rounded-3xl bg-gray-200 cursor-pointer'>
-                <FaUsers className='w-[35px] h-[35px] fill-[#03394b]' />
-                <span className='text-[#03394b]'>Community Support</span>
-            </div>
-
+  return (
+    <div className="w-full py-8 px-4 md:px-12 flex flex-wrap items-center justify-center gap-4">
+      {features.map((item, index) => (
+        <div
+          key={index}
+          className="flex items-center gap-3 bg-white hover:bg-gray-100 px-5 py-3 rounded-xl shadow-md transition duration-300 cursor-pointer"
+        >
+          {item.icon}
+          <span className="text-[#03394b] font-medium text-sm md:text-base">{item.text}</span>
         </div>
-    )
+      ))}
+    </div>
+  )
 }
 
 export default Logos

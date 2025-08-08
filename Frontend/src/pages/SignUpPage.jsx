@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import logo from '../assets/logo.jpg'
 import google from '../assets/google.jpg'
-import { MdOutlineRemoveRedEye } from "react-icons/md";
-import { MdRemoveRedEye } from "react-icons/md";
+import { MdOutlineRemoveRedEye, MdRemoveRedEye } from "react-icons/md";
 import { useNavigate } from 'react-router-dom'
 import { signInWithPopup } from 'firebase/auth'
 import { auth, provider } from '../utils/Firebase'
@@ -13,97 +12,130 @@ import { setUserData } from '../redux/userSlice'
 import { signUpUser, signUpWithGoogle } from '../utils/api'
 
 const SignUpPage = () => {
-
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [role, setRole] = useState("student")
-    const navigate = useNavigate()
-    let [show, setShow] = useState(false)
+    const [show, setShow] = useState(false)
     const [loading, setLoading] = useState(false)
-    let dispatch = useDispatch()
+
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     const handleSignUp = async () => {
-        setLoading(true);
+        setLoading(true)
         try {
-            const result = await signUpUser({ name, email, password, role });
-            dispatch(setUserData(result));
-            navigate('/');
-            toast.success('SignUp Successfully');
+            const result = await signUpUser({ name, email, password, role })
+            dispatch(setUserData(result))
+            navigate('/')
+            toast.success('SignUp Successfully')
         } catch (error) {
-            console.error(error);
-            toast.error(error.message || 'Signup failed');
+            console.error(error)
+            toast.error(error.message || 'Signup failed')
         } finally {
-            setLoading(false);
+            setLoading(false)
         }
-    };
+    }
 
     const googleSignUp = async () => {
         try {
-            const response = await signInWithPopup(auth, provider);
-            const user = response.user;
-            const name = user.displayName;
-            const email = user.email;
-
-            const result = await signUpWithGoogle({ name, email, role });
-            dispatch(setUserData(result));
-            navigate('/');
-            toast.success('SignUp Successfully');
+            const response = await signInWithPopup(auth, provider)
+            const user = response.user
+            const result = await signUpWithGoogle({ name: user.displayName, email: user.email, role })
+            dispatch(setUserData(result))
+            navigate('/')
+            toast.success('SignUp Successfully')
         } catch (error) {
-            console.error(error);
-            toast.error(error.message || 'Google signup failed');
+            console.error(error)
+            toast.error(error.message || 'Google signup failed')
         }
-    };
+    }
 
     return (
-        <div className='bg-[#dddbdb] w-[100vw] h-[100vh] flex items-center justify-center flex-col gap-3'>
-            <form className='w-[90%] md:w-200 h-150 bg-[white] shadow-xl rounded-2xl flex' onSubmit={(e) => e.preventDefault()}>
-                <div className='md:w-[50%] w-[100%] h-[100%] flex flex-col items-center justify-center gap-3 '>
-                    <div><h1 className='font-semibold text-[black] text-2xl'>Let's get Started</h1>
-                        <h2 className='text-[#999797] text-[18px]'>Create your account</h2>
+        <div className='w-screen h-screen flex items-center justify-center bg-[#f5f5f5] px-4'>
+            <form className='w-full max-w-[700px] bg-white shadow-xl rounded-2xl flex flex-col md:flex-row' onSubmit={(e) => e.preventDefault()}>
+                {/* Left Section */}
+                <div className='md:w-1/2 w-full flex flex-col items-center justify-center gap-4 p-6'>
+                    <div className='text-center'>
+                        <h1 className='font-semibold text-black text-2xl'>Let's get Started</h1>
+                        <h2 className='text-gray-500 text-md'>Create your account</h2>
                     </div>
-                    <div className='flex flex-col gap-1 w-[80%] items-start justify-center px-3'>
-                        <label htmlFor="name" className='font-semibold'>
-                            Name
-                        </label>
-                        <input id='name' type="text" className='border-1 w-[100%] h-[35px] border-[#e7e6e6] text-[15px] px-[20px]' placeholder='Your name' onChange={(e) => setName(e.target.value)} value={name} />
+
+                    {/* Name */}
+                    <div className='w-full'>
+                        <label htmlFor="name" className='font-semibold text-sm'>Name</label>
+                        <input id='name' type="text" placeholder='Your name' value={name} onChange={(e) => setName(e.target.value)} className='mt-1 w-full h-10 px-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black' />
                     </div>
-                    <div className='flex flex-col gap-1 w-[80%] items-start justify-center px-3'>
-                        <label htmlFor="email" className='font-semibold'>
-                            Email
-                        </label>
-                        <input id='email' type="text" className='border-1 w-[100%] h-[35px] border-[#e7e6e6] text-[15px] px-[20px]' placeholder='Your email' onChange={(e) => setEmail(e.target.value)} value={email} />
+
+                    {/* Email */}
+                    <div className='w-full'>
+                        <label htmlFor="email" className='font-semibold text-sm'>Email</label>
+                        <input id='email' type="email" placeholder='Your email' value={email} onChange={(e) => setEmail(e.target.value)} className='mt-1 w-full h-10 px-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black' />
                     </div>
-                    <div className='flex flex-col gap-1 w-[80%] items-start justify-center px-3 relative'>
-                        <label htmlFor="password" className='font-semibold'>
-                            Password
-                        </label>
-                        <input id='password' type={show ? "text" : "password"} className='border-1 w-[100%] h-[35px] border-[#e7e6e6] text-[15px] px-[20px]' placeholder='***********' onChange={(e) => setPassword(e.target.value)} value={password} />
-                        {!show && <MdOutlineRemoveRedEye className='absolute w-[20px] h-[20px] cursor-pointer right-[5%] bottom-[10%]' onClick={() => setShow(prev => !prev)} />}
-                        {show && <MdRemoveRedEye className='absolute w-[20px] h-[20px] cursor-pointer right-[5%] bottom-[10%]' onClick={() => setShow(prev => !prev)} />}
-                    </div>
-                    <div className='flex md:w-[50%] w-[70%] items-center justify-between'>
-                        <span className={`px-[10px] py-[5px] border-[1px] border-[#e7e6e6] rounded-2xl  cursor-pointer ${role === 'student' ? "border-black" : "border-[#646464]"}`} onClick={() => setRole("student")}>Student</span>
-                        <span className={`px-[10px] py-[5px] border-[1px] border-[#e7e6e6] rounded-2xl  cursor-pointer ${role === 'educator' ? "border-black" : "border-[#646464]"}`} onClick={() => setRole("educator")}>Educator</span>
-                    </div>
-                    <button className='w-[80%] h-[40px] bg-black text-white cursor-pointer flex items-center justify-center rounded-[5px]' disabled={loading} onClick={handleSignUp}>{loading ? <ClipLoader size={30} color='white' /> : "Sign Up"}</button>
+
+                    {/* Password */}
+                    <div className='w-full relative'>
+  <label htmlFor="password" className='font-semibold text-sm'>Password</label>
+  <div className="relative">
+    <input
+      id='password'
+      type={show ? "text" : "password"}
+      placeholder='********'
+      value={password}
+      onChange={(e) => setPassword(e.target.value)}
+      className='mt-1 w-full h-10 px-4 pr-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black'
+    />
+    <span
+      className="absolute top-1/2 right-3 transform -translate-y-1/2 text-gray-600 cursor-pointer"
+      onClick={() => setShow(prev => !prev)}
+    >
+      {show ? (
+        <MdRemoveRedEye className="w-5 h-5" />
+      ) : (
+        <MdOutlineRemoveRedEye className="w-5 h-5" />
+      )}
+    </span>
+  </div>
+</div>
 
 
-                    <div className='w-[80%] flex items-center gap-2'>
-                        <div className='w-[25%] h-[0.5px] bg-[#c4c4c4]'></div>
-                        <div className='w-[50%] text-[15px] text-[#6f6f6f] flex items-center justify-center '>Or continue with</div>
-                        <div className='w-[25%] h-[0.5px] bg-[#c4c4c4]'></div>
+                    {/* Role Selection */}
+                    <div className='flex w-full justify-between'>
+                        <span onClick={() => setRole("student")} className={`px-4 py-2 border rounded-full cursor-pointer ${role === 'student' ? 'border-black' : 'border-gray-400'}`}>Student</span>
+                        <span onClick={() => setRole("educator")} className={`px-4 py-2 border rounded-full cursor-pointer ${role === 'educator' ? 'border-black' : 'border-gray-400'}`}>Educator</span>
                     </div>
-                    <div className='w-[80%] h-[40px] border-1 border-[black] rounded-[5px] flex items-center justify-center  ' onClick={googleSignUp} ><img src={google} alt="" className='w-[25px]' /><span className='text-[18px] text-gray-500'>oogle</span> </div>
-                    <div className='text-[#6f6f6f]'>Already have an account? <span className='underline underline-offset-1 text-[black]' onClick={() => navigate("/login")}>Login</span></div>
 
+                    {/* Sign Up Button */}
+                    <button className='w-full h-10 bg-black text-white rounded-md flex items-center justify-center' disabled={loading} onClick={handleSignUp}>
+                        {loading ? <ClipLoader size={25} color='white' /> : "Sign Up"}
+                    </button>
+
+                    {/* Divider */}
+                    <div className='flex items-center w-full gap-2'>
+                        <div className='flex-1 h-px bg-gray-300' />
+                        <span className='text-sm text-gray-500'>or continue with</span>
+                        <div className='flex-1 h-px bg-gray-300' />
+                    </div>
+
+                    {/* Google Button */}
+                    <div className='w-full h-10 border border-gray-300 rounded-md flex items-center justify-center gap-2 cursor-pointer' onClick={googleSignUp}>
+                        <img src={google} alt="Google" className='w-5' />
+                        <span className='text-gray-600 text-sm'>Google</span>
+                    </div>
+
+                    {/* Login Link */}
+                    <div className='text-sm text-gray-600'>
+                        Already have an account?{' '}
+                        <span className='underline text-black cursor-pointer' onClick={() => navigate("/login")}>Login</span>
+                    </div>
                 </div>
-                <div className='w-[50%] h-[100%] rounded-r-2xl bg-[black] md:flex items-center justify-center flex-col hidden'><img src={logo} className='w-30 shadow-2xl' alt="" />
-                    <span className='text-[white] text-2xl'>VIRTUAL COURSES</span>
-                </div>
 
+                {/* Right Side Logo */}
+                <div className='md:w-1/2 hidden md:flex bg-black text-white rounded-r-2xl flex-col items-center justify-center gap-2 p-6'>
+                    <img src={logo} className='w-32 shadow-xl' alt="Logo" />
+                    <span className='text-xl font-semibold'>VIRTUAL COURSES</span>
+                </div>
             </form>
-
         </div>
     )
 }

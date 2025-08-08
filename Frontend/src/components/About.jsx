@@ -1,36 +1,65 @@
-import React from 'react'
-import about from "../assets/about.jpg"
-import VideoPlayer from './VideoPlayer'
+import React from 'react';
+import about from "../assets/about.jpg";
+import VideoPlayer from './VideoPlayer';
 import { TfiLayoutLineSolid } from "react-icons/tfi";
 import { BiSolidBadgeCheck } from "react-icons/bi";
 
 const About = () => {
   return (
-    <div className='w-[100vw] lg:h-[70vh] min-h-[50vh] flex flex-wrap items-center justify-center gap-2 mb-[30px]'>
-        <div className='lg:w-[40%] md:w-[80%] w-[100%] h-[100%] flex  items-center justify-center relative' >
-            <img src={about} className='w-[80%] h-[90%] rounded-lg ' alt="" />
-            <VideoPlayer />
-
+    <section className="w-full px-4 md:px-10 lg:px-20 py-12 flex flex-col lg:flex-row items-center justify-center gap-10 bg-white">
+      {/* Left Side - Image & Video */}
+      <div className="relative w-full lg:w-1/2 flex items-center justify-center">
+        <img
+          src={about}
+          alt="About"
+          className="w-full max-w-[500px] h-auto rounded-xl shadow-lg"
+        />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <VideoPlayer />
         </div>
-        <div className='lg:w-[50%] md:w-[70%] w-[100%] h-[100%] flex  items-start justify-center flex-col px-[35px] md:px-[80px]' >
-          <div className='flex text-[18px] items-center justify-center gap-[20px]'>About Us <TfiLayoutLineSolid  className='w-[40px] h-[40px]'/> </div>
-          <div className='md:text-[45px] text-[35px] font-semibold'>We Are Maximize Your Learning Growth</div>
-          <div className='text-[15px] '>We provide a modern Learning Management System to simplify online education, track progress, and enhance student-instructor collaboration efficiently.</div>
-          <div className=' w-[100%] lg:w-[60%]'>
-            <div className='flex items-center justify-between  mt-[40px]'>
-              <div className='flex items-center justify-center gap-[10px]'><BiSolidBadgeCheck className='w-[20px] h-[20px]'/>Simplified Learning</div>
-              <div className='flex items-center justify-center gap-[10px]'><BiSolidBadgeCheck className='w-[20px] h-[20px]'/>Expert Trainers</div> 
-            </div>
-            <div className='flex items-center justify-between mt-[20px] '>
-              <div className='flex items-center justify-center gap-[10px]'><BiSolidBadgeCheck className='w-[20px] h-[20px]'/>Big Experience</div>
-              <div className='flex items-center justify-center gap-[10px]'><BiSolidBadgeCheck className='w-[20px] h-[20px]'/>Lifetime Access</div>
+      </div>
 
-            </div>
+      {/* Right Side - Content */}
+      <div className="w-full lg:w-1/2 space-y-6 text-gray-800">
+        {/* Section Title */}
+        <div className="flex items-center gap-3 text-primary text-lg font-medium">
+          <span>About Us</span>
+          <TfiLayoutLineSolid className="w-6 h-6" />
+        </div>
+
+        {/* Main Heading */}
+        <h2 className="text-3xl md:text-4xl font-bold leading-snug">
+          We Maximize Your Learning Growth
+        </h2>
+
+        {/* Description */}
+        <p className="text-base leading-relaxed text-gray-600">
+          We provide a modern Learning Management System to simplify online education,
+          track progress, and enhance student-instructor collaboration efficiently.
+        </p>
+
+        {/* Features */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4 text-sm md:text-base">
+          <div className="flex items-center gap-2">
+            <BiSolidBadgeCheck className="text-green-600 w-5 h-5" />
+            Simplified Learning
+          </div>
+          <div className="flex items-center gap-2">
+            <BiSolidBadgeCheck className="text-green-600 w-5 h-5" />
+            Expert Trainers
+          </div>
+          <div className="flex items-center gap-2">
+            <BiSolidBadgeCheck className="text-green-600 w-5 h-5" />
+            Big Experience
+          </div>
+          <div className="flex items-center gap-2">
+            <BiSolidBadgeCheck className="text-green-600 w-5 h-5" />
+            Lifetime Access
           </div>
         </div>
-      
-    </div>
-  )
-}
+      </div>
+    </section>
+  );
+};
 
-export default About
+export default About;

@@ -1,7 +1,7 @@
 // src/utils/api.js
 import axios from "axios";
 
-const BASE_URL = `${import.meta.env.VITE_BASE_URL}api/v1/`;
+const BASE_URL = `${import.meta.env.VITE_BASE_URL}api/`;
 
 // Auth APIs
 export const signUpUser = async (formData) => {

@@ -56,46 +56,114 @@ const LoginPage = () => {
     };
 
     return (
-        <div className='bg-[#dddbdb] w-[100vw] h-[100vh] flex items-center justify-center flex-col gap-3'>
-            <form className='w-[90%] md:w-200 h-150 bg-[white] shadow-xl rounded-2xl flex' onSubmit={(e) => e.preventDefault()}>
-                <div className='md:w-[50%] w-[100%] h-[100%] flex flex-col items-center justify-center gap-4 '>
-                    <div><h1 className='font-semibold text-[black] text-2xl'>Welcome back</h1>
-                        <h2 className='text-[#999797] text-[18px]'>Login to your account</h2>
-                    </div>
-                    <div className='flex flex-col gap-1 w-[85%] items-start justify-center px-3'>
-                        <label htmlFor="email" className='font-semibold'>
-                            Email
-                        </label>
-                        <input id='email' type="text" className='border-1 w-[100%] h-[35px] border-[#e7e6e6] text-[15px] px-[20px]' placeholder='Your email' onChange={(e) => setEmail(e.target.value)} value={email} />
-                    </div>
-                    <div className='flex flex-col gap-1 w-[85%] items-start justify-center px-3 relative'>
-                        <label htmlFor="password" className='font-semibold'>
-                            Password
-                        </label>
-                        <input id='password' type={show ? "text" : "password"} className='border-1 w-[100%] h-[35px] border-[#e7e6e6] text-[15px] px-[20px]' placeholder='***********' onChange={(e) => setPassword(e.target.value)} value={password} />
-                        {!show && <MdOutlineRemoveRedEye className='absolute w-[20px] h-[20px] cursor-pointer right-[5%] bottom-[10%]' onClick={() => setShow(prev => !prev)} />}
-                        {show && <MdRemoveRedEye className='absolute w-[20px] h-[20px] cursor-pointer right-[5%] bottom-[10%]' onClick={() => setShow(prev => !prev)} />}
-                    </div>
-
-                    <button className='w-[80%] h-[40px] bg-black text-white cursor-pointer flex items-center justify-center rounded-[5px]' disabled={loading} onClick={handleLogin}>{loading ? <ClipLoader size={30} color='white' /> : "Login"}</button>
-                    <span className='text-[13px] cursor-pointer text-[#585757]' onClick={() => navigate("/forgotpassword")}>Forget your password?</span>
-
-                    <div className='w-[80%] flex items-center gap-2'>
-                        <div className='w-[25%] h-[0.5px] bg-[#c4c4c4]'></div>
-                        <div className='w-[50%] text-[15px] text-[#999797] flex items-center justify-center '>Or continue with</div>
-                        <div className='w-[25%] h-[0.5px] bg-[#c4c4c4]'></div>
-                    </div>
-
-                    <div className='w-[80%] h-[40px] border-1 border-[#d3d2d2] rounded-[5px] flex items-center justify-center ' onClick={googleLogin} ><img src={google} alt="" className='w-[25px]' /><span className='text-[18px] text-gray-500'>oogle</span> </div>
-                    <div className='text-[#6f6f6f]'>Don't have an account? <span className='underline underline-offset-1 text-[black]' onClick={() => navigate("/signup")}>Sign up</span></div>
-
+        <div className="w-screen h-screen flex items-center justify-center bg-[#f5f5f5] px-4">
+        <form
+            className="w-full max-w-[700px] bg-white shadow-xl rounded-2xl flex flex-col md:flex-row"
+            onSubmit={(e) => e.preventDefault()}
+        >
+            {/* Left Side - Form */}
+            <div className="md:w-1/2 w-full flex flex-col items-center justify-center gap-4 p-6">
+                <div className="text-center">
+                    <h1 className="text-2xl font-semibold text-black">Welcome back</h1>
+                    <h2 className="text-gray-500 text-md">Login to your account</h2>
                 </div>
-                <div className='w-[50%] h-[100%] rounded-r-2xl bg-[black] md:flex items-center justify-center flex-col hidden'><img src={logo} className='w-30 shadow-2xl' alt="" />
-                    <span className='text-[white] text-2xl'>VIRTUAL COURSES</span>
-                </div>
-            </form>
 
+                {/* Email */}
+                <div className="w-full">
+                    <label htmlFor="email" className="font-semibold text-sm">Email</label>
+                    <input
+                        id="email"
+                        type="email"
+                        placeholder="Your email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        className="mt-1 w-full h-10 px-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
+                    />
+                </div>
+
+                {/* Password */}
+                <div className="w-full">
+  <label htmlFor="password" className="font-semibold text-sm">
+    Password
+  </label>
+
+  <div className="relative">
+    <input
+      id="password"
+      type={show ? "text" : "password"}
+      placeholder="********"
+      value={password}
+      onChange={(e) => setPassword(e.target.value)}
+      className="mt-1 w-full h-10 px-4 pr-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
+    />
+
+    <span
+      onClick={() => setShow((prev) => !prev)}
+      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600 cursor-pointer"
+    >
+      {show ? (
+        <MdRemoveRedEye className="w-5 h-5" />
+      ) : (
+        <MdOutlineRemoveRedEye className="w-5 h-5" />
+      )}
+    </span>
+  </div>
+</div>
+
+
+                {/* Login Button */}
+                <button
+                    className="w-full h-10 bg-black text-white rounded-md flex items-center justify-center"
+                    onClick={handleLogin}
+                    disabled={loading}
+                >
+                    {loading ? <ClipLoader size={25} color="white" /> : "Login"}
+                </button>
+
+                {/* Forgot Password */}
+                <span
+                    className="text-sm text-gray-600 cursor-pointer"
+                    onClick={() => navigate("/forgotpassword")}
+                >
+                    Forgot your password?
+                </span>
+
+                {/* Divider */}
+                <div className="flex items-center w-full gap-2">
+                    <div className="flex-1 h-px bg-gray-300" />
+                    <span className="text-sm text-gray-500">or continue with</span>
+                    <div className="flex-1 h-px bg-gray-300" />
+                </div>
+
+                {/* Google Login */}
+                <div
+                    className="w-full h-10 border border-gray-300 rounded-md flex items-center justify-center gap-2 cursor-pointer"
+                    onClick={googleLogin}
+                >
+                    <img src={google} alt="Google" className="w-5" />
+                    <span className="text-gray-600 text-sm">Google</span>
+                </div>
+
+                {/* Signup Link */}
+                <div className="text-sm text-gray-600">
+                    Don't have an account?{" "}
+                    <span
+                        className="underline text-black cursor-pointer"
+                        onClick={() => navigate("/signup")}
+                    >
+                        Sign up
+                    </span>
+                </div>
+            </div>
+
+            {/* Right Side - Logo Panel */}
+            <div className="w-1/2 hidden md:flex bg-black text-white rounded-r-2xl flex-col items-center justify-center gap-2 p-6">
+                <img src={logo} className="w-32 shadow-xl" alt="Logo" />
+                <span className="text-xl font-semibold">VIRTUAL COURSES</span>
+            </div>
+        </form>
         </div>
+
     )
 }
 

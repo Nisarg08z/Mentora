@@ -1,19 +1,19 @@
-import React from 'react'
-import home from "../assets/home1.jpg"
-import Nav from '../components/Nav'
+import React from 'react';
+import home from "../assets/home1.jpg";
+import Nav from '../components/Nav';
 import { SiViaplay } from "react-icons/si";
 import Logos from '../components/Logos';
 import Cardspage from '../components/Cardspage';
 import ExploreCourses from '../components/ExploreCourses';
 import About from '../components/About';
-import ai from '../assets/ai.png'
-import ai1 from '../assets/SearchAi.png'
+import ai from '../assets/ai.png';
+import ai1 from '../assets/SearchAi.png';
 import ReviewPage from '../components/ReviewPage';
 import Footer from '../components/Footer';
 import { useNavigate } from 'react-router-dom';
 
-const HomePage = () =>  {
-    const navigate = useNavigate()
+const HomePage = () => {
+    const navigate = useNavigate();
 
     return (
         <div className='w-[100%] overflow-hidden'>
@@ -40,7 +40,7 @@ const HomePage = () =>  {
             <ReviewPage />
             <Footer />
         </div>
-    )
-}
+    );
+};
 
-export default HomePage
+export default HomePage;

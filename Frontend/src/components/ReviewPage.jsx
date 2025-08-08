@@ -1,30 +1,45 @@
-import React, { useEffect, useState } from 'react'
-import ReviewCard from './ReviewCard'
-import { useSelector } from 'react-redux';
-
+import React, { useEffect, useState } from "react";
+import ReviewCard from "./ReviewCard";
+import { useSelector } from "react-redux";
 
 const ReviewPage = () => {
   const [latestReview, setLatestReview] = useState([]);
-  const { allReview } = useSelector(state => state.review)
+  const { allReview } = useSelector((state) => state.review);
 
   useEffect(() => {
     setLatestReview(allReview.slice(0, 6));
-  }, [allReview])
+  }, [allReview]);
+
   return (
-    <div className='flex items-center justify-center flex-col'>
-      <h1 className='md:text-[45px] text-[30px] font-semibold text-center mt-[30px] px-[20px]'>Real Reviews from Real Learners</h1>
-      <span className='lg:w-[50%] md:w-[80%] text-[15px] text-center mt-[30px] mb-[30px] px-[20px]'>Discover how our Virtual Courses is transforming learning experiences through real feedback from students and professionals worldwide.</span>
-      <div className='w-[100%] min-[100vh] flex items-center justify-center flex-wrap gap-[50px] lg:p-[50px] md:p-[30px] p-[10px] mb-[40px]
-    '>
-        {
-          latestReview.map((item, index) => (
-            <ReviewCard key={index} rating={item.rating} image={item.user.photoUrl} text={item.comment} name={item.user.name} role={item.user.role} />
-          ))
-        }
+    <section className="bg-gray-50 py-16 px-4 md:px-10">
+      <div className="max-w-6xl mx-auto text-center">
+        <h1 className="text-3xl md:text-5xl font-bold text-gray-800 mb-6">
+          Real Reviews from Real Learners
+        </h1>
+        <p className="text-gray-600 text-base md:text-lg max-w-3xl mx-auto mb-12">
+          Discover how our virtual courses are transforming learning experiences through real feedback from students and professionals worldwide.
+        </p>
+        <div className="flex flex-wrap justify-center gap-6">
+          {latestReview.map((item, index) => (
+            <div
+              key={index}
+              className="animate-fade-in transition-opacity duration-500"
+              style={{ animationDelay: `${index * 100}ms` }}
+            >
+              <ReviewCard
+                rating={item.rating}
+                image={item.user.photoUrl}
+                text={item.comment}
+                name={item.user.name}
+                role={item.user.role}
+              />
+            </div>
+          ))}
+        </div>
+
       </div>
-    </div>
-  )
-}
+    </section>
+  );
+};
 
-
-export default ReviewPage
+export default ReviewPage;
