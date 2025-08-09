@@ -1,6 +1,7 @@
 import React from "react";
 import { FaStar } from "react-icons/fa6";
 import { FaRegStar } from "react-icons/fa";
+import empty from "../assets/empty.jpg"
 
 const ReviewCard = ({ text, name, image, rating, role }) => {
   return (
@@ -25,7 +26,7 @@ const ReviewCard = ({ text, name, image, rating, role }) => {
       {/* Reviewer */}
       <div className="flex items-center gap-3">
         <img
-          src={image}
+          src={image || empty}
           alt={name}
           className="w-11 h-11 rounded-full object-cover ring-1 ring-gray-200"
         />

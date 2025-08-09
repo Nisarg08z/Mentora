@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ReviewCard from "./ReviewCard";
-import { useSelector } from "react-redux";
+import { connect, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const ReviewPage = () => {
   const [latestReview, setLatestReview] = useState([]);
@@ -31,18 +32,17 @@ const ReviewPage = () => {
                 overflow: "hidden",
                 display: "flex",
                 flexDirection: "column",
-                // optionally add boxShadow or borderRadius if needed:
-                // boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-                // borderRadius: '12px',
               }}
             >
-              <ReviewCard
-                rating={item.rating}
-                image={item.user.photoUrl}
-                text={item.comment}
-                name={item.user.name}
-                role={item.user.role}
-              />
+              <Link to={`/viewcourse/${item.course}`} key={index}>
+                <ReviewCard
+                  rating={item.rating}
+                  image={item.user.photoUrl}
+                  text={item.comment}
+                  name={item.user.name}
+                  role={item.user.role}
+                />
+              </Link>
             </div>
           ))}
         </div>
