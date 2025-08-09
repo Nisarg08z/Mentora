@@ -20,6 +20,10 @@ import Dashboard from './pages/DashboardPage'
 import Courses from './pages/CoursesPage'
 import CreateCourse from './pages/CreateCoursePage'
 import AddCourses from './pages/AddCoursesPage'
+import CreateLecture from './pages/CreateLecturePage'
+import EditLecture from './pages/EditLecturePage'
+import AllCouses from './pages/AllCousesPage'
+import ViewCourse from './pages/ViewCoursePage'
 
 
 function App() {
@@ -53,6 +57,10 @@ function App() {
                 <Route path='/courses' element={userData?.role === "educator" ? <Courses /> : <Navigate to={"/signup"} />} />
                 <Route path='/createcourses' element={userData?.role === "educator" ? <CreateCourse /> : <Navigate to={"/signup"} />} />
                 <Route path='/addcourses/:courseId' element={userData?.role === "educator" ? <AddCourses /> : <Navigate to={"/signup"} />} />
+                <Route path='/createlecture/:courseId' element={userData?.role === "educator" ? <CreateLecture /> : <Navigate to={"/signup"} />} />
+                <Route path='/editlecture/:courseId/:lectureId' element={userData?.role === "educator" ? <EditLecture /> : <Navigate to={"/signup"} />} />
+                <Route path='/allcourses' element={userData ? <AllCouses /> : <Navigate to={"/signup"} />} />
+                <Route path='/viewcourse/:courseId' element={userData ? <ViewCourse /> : <Navigate to={"/signup"} />} />
             </Routes>
         </>
     )

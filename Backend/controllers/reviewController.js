@@ -37,11 +37,14 @@ export const getCourseReviews = async (req, res) => {
   try {
     const { courseId } = req.params;
     const reviews = await Review.find({ course: courseId })
+      .populate('user', 'name photoUrl role'); 
+
     return res.status(200).json(reviews);
   } catch (error) {
     return res.status(500).json({ message: "Error fetching reviews" });
   }
 };
+
 
 
 export const getAllReviews = async (req, res) => {

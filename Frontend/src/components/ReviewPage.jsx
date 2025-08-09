@@ -24,7 +24,17 @@ const ReviewPage = () => {
             <div
               key={index}
               className="animate-fade-in transition-opacity duration-500"
-              style={{ animationDelay: `${index * 100}ms` }}
+              style={{
+                animationDelay: `${index * 100}ms`,
+                width: 320,
+                height: 280,
+                overflow: "hidden",
+                display: "flex",
+                flexDirection: "column",
+                // optionally add boxShadow or borderRadius if needed:
+                // boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+                // borderRadius: '12px',
+              }}
             >
               <ReviewCard
                 rating={item.rating}
@@ -36,7 +46,6 @@ const ReviewPage = () => {
             </div>
           ))}
         </div>
-
       </div>
     </section>
   );

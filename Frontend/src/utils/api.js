@@ -252,3 +252,153 @@ export const fetchCourseByID = async (courseId) => {
     throw error.response?.data || error;
   }
 };
+
+export const createLecture = async (courseId, lectureTitle) => {
+  try {
+    const response = await axios.post(
+      `${BASE_URL}course/createlecture/${courseId}`,
+      { lectureTitle },
+      { withCredentials: true }
+    );
+    return response.data; 
+  } catch (error) {
+    console.error(
+      "Create Lecture API Error:",
+      error.response?.data?.message || error.message
+    );
+    throw error.response?.data || error;
+  }
+};
+
+export const getCourseLectures = async (courseId) => {
+  try {
+    const response = await axios.get(
+      `${BASE_URL}course/getcourselecture/${courseId}`,
+      { withCredentials: true }
+    );
+    return response.data; 
+  } catch (error) {
+    console.error(
+      "Get Lectures API Error:",
+      error.response?.data?.message || error.message
+    );
+    throw error.response?.data || error;
+  }
+};
+
+export const editLecture = async (lectureId, formData) => {
+  try {
+    const response = await axios.post(
+      `${BASE_URL}course/editlecture/${lectureId}`,
+      formData,
+      { withCredentials: true }
+    );
+    return response.data; 
+  } catch (error) {
+    console.error(
+      "Edit Lecture API Error:",
+      error.response?.data?.message || error.message
+    );
+    throw error.response?.data || error;
+  }
+};
+
+export const removeLecture = async (lectureId) => {
+  try {
+    const response = await axios.delete(
+      `${BASE_URL}course/removelecture/${lectureId}`,
+      { withCredentials: true }
+    );
+    return response.data; 
+  } catch (error) {
+    console.error(
+      "Remove Lecture API Error:",
+      error.response?.data?.message || error.message
+    );
+    throw error.response?.data || error;
+  }
+};
+
+export const giveReview = async (rating, comment, courseId) => {
+  try {
+    const response = await axios.post(
+      `${BASE_URL}review/givereview`,
+      { rating, comment, courseId },
+      { withCredentials: true }
+    );
+    return response.data;
+  } catch (error) {
+    console.error(
+      "Give Review API Error:",
+      error.response?.data?.message || error.message
+    );
+    throw error.response?.data || error;
+  }
+};
+
+export const getCreator = async (userId) => {
+  try {
+    const response = await axios.post(
+      `${BASE_URL}course/getcreator`,
+      { userId },
+      { withCredentials: true }
+    );
+    return response.data; 
+  } catch (error) {
+    console.error(
+      "Get Creator API Error:",
+      error.response?.data?.message || error.message
+    );
+    throw error.response?.data || error;
+  }
+};
+
+export const createOrder = async (courseId, userId) => {
+  try {
+    const response = await axios.post(
+      `${BASE_URL}payment/create-order`,
+      { courseId, userId },
+      { withCredentials: true }
+    );
+    return response.data; 
+  } catch (error) {
+    console.error(
+      "Create Order API Error:",
+      error.response?.data?.message || error.message
+    );
+    throw error.response?.data || error;
+  }
+};
+
+export const verifyPayment = async (paymentResponse, courseId, userId) => {
+  try {
+    const response = await axios.post(
+      `${BASE_URL}payment/verify-payment`,
+      { ...paymentResponse, courseId, userId },
+      { withCredentials: true }
+    );
+    return response.data;
+  } catch (error) {
+    console.error(
+      "Verify Payment API Error:",
+      error.response?.data?.message || error.message
+    );
+    throw error.response?.data || error;
+  }
+};
+
+export const getCourseReviews = async (courseId) => {
+  try {
+    const response = await axios.get(
+      `${BASE_URL}review/getCourseReviews/${courseId}`,
+      { withCredentials: true }
+    );
+    return response.data;
+  } catch (error) {
+    console.error(
+      "Get Course Reviews API Error:",
+      error.response?.data?.message || error.message
+    );
+    throw error.response?.data || error;
+  }
+};
