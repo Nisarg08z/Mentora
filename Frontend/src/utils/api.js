@@ -176,3 +176,79 @@ export const updateUserProfile = async (formData) => {
     throw error.response?.data || error;
   }
 };
+
+export const getCreatorCourses = async () => {
+  try {
+    const response = await axios.get(
+      `${BASE_URL}course/getcreatorcourses`,
+      { withCredentials: true }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Get Creator Courses API Error:", error.response?.data?.message || error.message);
+    throw error.response?.data || error;
+  }
+};
+
+export const createCourse = async (title, category) => {
+  try {
+    const response = await axios.post(
+      `${BASE_URL}course/create`,
+      { title, category },
+      { withCredentials: true }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Create Course API Error:", error.response?.data?.message || error.message);
+    throw error.response?.data || error;
+  }
+};
+
+export const handleDelete = async (courseId) => {
+  try {
+    const response = await axios.delete(
+      `${BASE_URL}course/removecourse/${courseId}`,
+      { withCredentials: true }
+    );
+    return response.data;
+  } catch (error) {
+    console.error(
+      "Remove Course API Error:",
+      error.response?.data?.message || error.message
+    );
+    throw error.response?.data || error;
+  }
+};
+
+export const editCourse = async (courseId, formData) => {
+  try {
+    const response = await axios.post(
+      `${BASE_URL}course/editcourse/${courseId}`,
+      formData,
+      { withCredentials: true }
+    );
+    return response.data;
+  } catch (error) {
+    console.error(
+      "Edit Course API Error:",
+      error.response?.data?.message || error.message
+    );
+    throw error.response?.data || error;
+  }
+};
+
+export const fetchCourseByID = async (courseId) => {
+  try {
+    const response = await axios.get(
+      `${BASE_URL}course/getcourse/${courseId}`,
+      { withCredentials: true }
+    );
+    return response.data;
+  } catch (error) {
+    console.error(
+      "Get Course By ID API Error:",
+      error.response?.data?.message || error.message
+    );
+    throw error.response?.data || error;
+  }
+};

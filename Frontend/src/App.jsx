@@ -17,6 +17,10 @@ import ForgotPassword from './pages/ForgotPasswordPage'
 import Profile from './pages/ProfilePage'
 import EditProfile from './pages/EditProfilePage'
 import Dashboard from './pages/DashboardPage'
+import Courses from './pages/CoursesPage'
+import CreateCourse from './pages/CreateCoursePage'
+import AddCourses from './pages/AddCoursesPage'
+
 
 function App() {
     const { userData, loading } = useSelector(state => state.user)
@@ -46,6 +50,9 @@ function App() {
                 <Route path='/profile' element={userData ? <Profile /> : <Navigate to={"/signup"} />} />
                 <Route path='/editprofile' element={userData ? <EditProfile /> : <Navigate to={"/signup"} />} />
                 <Route path='/dashboard' element={userData?.role === "educator" ? <Dashboard /> : <Navigate to={"/signup"} />} />
+                <Route path='/courses' element={userData?.role === "educator" ? <Courses /> : <Navigate to={"/signup"} />} />
+                <Route path='/createcourses' element={userData?.role === "educator" ? <CreateCourse /> : <Navigate to={"/signup"} />} />
+                <Route path='/addcourses/:courseId' element={userData?.role === "educator" ? <AddCourses /> : <Navigate to={"/signup"} />} />
             </Routes>
         </>
     )
