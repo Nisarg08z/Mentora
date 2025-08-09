@@ -1,6 +1,6 @@
 import React from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer } from 'react-toastify'
 import { useSelector } from 'react-redux'
 
 import getCurrentUser from './hooks/getCurrentUser'
@@ -14,15 +14,25 @@ import Home from './pages/HomePage'
 import Login from './pages/LoginPage'
 import SignUp from './pages/SignUpPage'
 import ForgotPassword from './pages/ForgotPasswordPage'
+import Profile from './pages/ProfilePage'
+import EditProfile from './pages/EditProfilePage'
+import Dashboard from './pages/DashboardPage'
 
 function App() {
-
-    let { userData } = useSelector(state => state.user)
+    const { userData, loading } = useSelector(state => state.user)
 
     getCurrentUser()
     getCouseData()
     getAllReviews()
     getCreatorCourseData()
+
+    if (loading) {
+        return (
+            <div className="flex items-center justify-center min-h-screen bg-gray-100">
+                <div className="text-lg font-semibold">Loading...</div>
+            </div>
+        )
+    }
 
     return (
         <>
@@ -33,7 +43,9 @@ function App() {
                 <Route path='/login' element={!userData ? <Login /> : <Navigate to={"/"} />} />
                 <Route path='/signup' element={!userData ? <SignUp /> : <Navigate to={"/"} />} />
                 <Route path='/forgotpassword' element={<ForgotPassword />} />
-
+                <Route path='/profile' element={userData ? <Profile /> : <Navigate to={"/signup"} />} />
+                <Route path='/editprofile' element={userData ? <EditProfile /> : <Navigate to={"/signup"} />} />
+                <Route path='/dashboard' element={userData?.role === "educator" ? <Dashboard /> : <Navigate to={"/signup"} />} />
             </Routes>
         </>
     )

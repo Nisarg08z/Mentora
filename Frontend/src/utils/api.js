@@ -159,3 +159,20 @@ export const resetPassword = async ({ email, password }) => {
     throw error.response?.data || error;
   }
 };
+
+export const updateUserProfile = async (formData) => {
+  try {
+    const response = await axios.post(
+      `${BASE_URL}user/updateprofile`,
+      formData,
+      { withCredentials: true }
+    );
+    return response.data;
+  } catch (error) {
+    console.error(
+      "Update Profile Error:",
+      error.response?.data?.message || error.message
+    );
+    throw error.response?.data || error;
+  }
+};

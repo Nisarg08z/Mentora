@@ -1,16 +1,17 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { setUserData } from "../redux/userSlice";
+import { setUserData, setLoading } from "../redux/userSlice";
 import { fetchCurrentUser } from "../utils/api";
 
-const useCurrentUser = () => {
+const getCurrentUser = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchUser = async () => {
+      dispatch(setLoading(true));
       try {
         const user = await fetchCurrentUser();
-        dispatch(setUserData(user));
+        dispatch(setUserData(user || null));
       } catch (error) {
         console.error("Fetch user failed:", error);
         dispatch(setUserData(null));
@@ -21,4 +22,4 @@ const useCurrentUser = () => {
   }, [dispatch]);
 };
 
-export default useCurrentUser;
+export default getCurrentUser;
