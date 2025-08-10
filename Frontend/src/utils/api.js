@@ -402,3 +402,20 @@ export const getCourseReviews = async (courseId) => {
     throw error.response?.data || error;
   }
 };
+
+export const getRecommendations = async (query) => {
+  try {
+    const response = await axios.post(
+      `${BASE_URL}ai/search`,
+      { input: query },
+      { withCredentials: true }
+    );
+    return response.data;
+  } catch (error) {
+    console.error(
+      "Get Recommendations API Error:",
+      error.response?.data?.message || error.message
+    );
+    throw error.response?.data || error;
+  }
+};

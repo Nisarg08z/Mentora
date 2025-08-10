@@ -13,6 +13,8 @@ const Cardspage = () => {
     setPopularCourses(courseData.slice(0, 6));
   }, [courseData]);
 
+  console.log("===>>" ,popularCourses)
+
   return (
     <section className="w-full flex flex-col items-center justify-center py-20 px-4 sm:px-6 lg:px-8 bg-white text-gray-800 transition-all">
       <h1 className="text-4xl md:text-5xl font-bold text-center mb-4">

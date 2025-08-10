@@ -24,7 +24,9 @@ import CreateLecture from './pages/CreateLecturePage'
 import EditLecture from './pages/EditLecturePage'
 import AllCouses from './pages/AllCousesPage'
 import ViewCourse from './pages/ViewCoursePage'
-
+import SearchWithAi from './pages/SearchWithAiPage'
+import EnrolledCourse from './pages/EnrolledCoursePage'
+import ViewLecture from './pages/ViewLecturePage'
 
 function App() {
     const { userData, loading } = useSelector(state => state.user)
@@ -44,7 +46,14 @@ function App() {
 
     return (
         <>
-            <ToastContainer />
+            <ToastContainer
+                position="bottom-right"
+                toastOptions={{
+                    style: {
+                        background: '#2d2d2d',
+                        color: '#fff',
+                    },
+                }} />
             <ScrollToTop />
             <Routes>
                 <Route path='/' element={<Home />} />
@@ -61,6 +70,9 @@ function App() {
                 <Route path='/editlecture/:courseId/:lectureId' element={userData?.role === "educator" ? <EditLecture /> : <Navigate to={"/signup"} />} />
                 <Route path='/allcourses' element={userData ? <AllCouses /> : <Navigate to={"/signup"} />} />
                 <Route path='/viewcourse/:courseId' element={userData ? <ViewCourse /> : <Navigate to={"/signup"} />} />
+                <Route path='/searchwithai' element={userData ? <SearchWithAi /> : <Navigate to={"/signup"} />} />
+                <Route path='/enrolledcourses' element={userData ? <EnrolledCourse /> : <Navigate to={"/signup"} />} />
+                <Route path='/viewlecture/:courseId' element={userData ? <ViewLecture /> : <Navigate to={"/signup"} />} />
             </Routes>
         </>
     )
