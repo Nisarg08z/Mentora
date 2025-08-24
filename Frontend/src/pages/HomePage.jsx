@@ -1,5 +1,5 @@
 import React from 'react';
-import home from "../assets/home1.jpg";
+import home from "../assets/home1.png";
 import Nav from '../components/Nav';
 import { SiViaplay } from "react-icons/si";
 import Logos from '../components/Logos';
